@@ -252,7 +252,7 @@ open class DKImagePickerController : UINavigationController {
             hasInitialized = true
             
             if self.sourceType == .camera {
-                self.isNavigationBarHidden = true
+                //self.isNavigationBarHidden = true
                 
                 let camera = self.createCamera()
                 if camera is UINavigationController {
@@ -262,7 +262,7 @@ open class DKImagePickerController : UINavigationController {
                     self.setViewControllers([camera], animated: false)
                 }
             } else {
-                self.isNavigationBarHidden = false
+                //self.isNavigationBarHidden = false
                 let rootVC = DKAssetGroupDetailVC()
                 rootVC.imagePickerController = self
                 

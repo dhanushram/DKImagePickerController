@@ -140,7 +140,7 @@ public class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, U
 		self.selectGroupButton.sizeToFit()
 		self.selectGroupButton.isEnabled = groupsCount > 1
 		
-		self.navigationItem.titleView = self.selectGroupButton
+		//self.navigationItem.titleView = self.selectGroupButton
 	}
     
     func showGroupSelector() {
