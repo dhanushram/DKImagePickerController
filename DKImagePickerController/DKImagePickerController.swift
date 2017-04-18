@@ -206,11 +206,15 @@ open class DKImagePickerController : UINavigationController {
     /// The callback block is executed when user pressed the select button.
     public var didSelectAssets: ((_ assets: [DKAsset]) -> Void)?
     
+    /// The callback block is executed whenever user 'selectedAssets' changes
+    public var assetSelectionUpdated: (([DKAsset]) -> ())?
+    
     /// It will have selected the specific assets.
     public var defaultSelectedAssets: [DKAsset]? {
         didSet {
             if let count = self.defaultSelectedAssets?.count, count > 0 {
                 self.selectedAssets = self.defaultSelectedAssets ?? []
+                self.assetSelectionUpdated?(self.selectedAssets)
                 
                 if let rootVC = self.viewControllers.first as? DKAssetGroupDetailVC {
                     rootVC.collectionView.reloadData()
@@ -429,6 +433,7 @@ open class DKImagePickerController : UINavigationController {
         if self.selectedAssets.count > 0 {
             let assets = self.selectedAssets
             self.selectedAssets.removeAll()
+            self.assetSelectionUpdated?(self.selectedAssets)
             self.UIDelegate.imagePickerController(self, didDeselectAssets: assets)
             if let rootVC = self.viewControllers.first as? DKAssetGroupDetailVC {
                 rootVC.collectionView?.reloadData()
@@ -440,9 +445,11 @@ open class DKImagePickerController : UINavigationController {
         if self.singleSelect {
             self.deselectAllAssets()
             self.selectedAssets.append(asset)
+            self.assetSelectionUpdated?(self.selectedAssets)
             self.done()
         } else {
             self.selectedAssets.append(asset)
+            self.assetSelectionUpdated?(self.selectedAssets)
             if self.sourceType == .camera {
                 self.done()
             } else {
@@ -453,6 +460,7 @@ open class DKImagePickerController : UINavigationController {
     
     internal func deselectImage(_ asset: DKAsset) {
         self.selectedAssets.remove(at: selectedAssets.index(of: asset)!)
+        self.assetSelectionUpdated?(self.selectedAssets)
         self.UIDelegate.imagePickerController(self, didDeselectAssets: [asset])
     }
     
