@@ -326,10 +326,10 @@ open class DKImagePickerController : UINavigationController {
     private func createCamera() -> UIViewController {
         let didCancel = { () in
             if self.sourceType == .camera {
-                self.dismiss(animated: true, completion: nil)
+                //self.dismiss(animated: true, completion: nil)
                 self.dismiss(animated: false)
             } else {
-                self.dismiss(animated: true, completion: nil)
+                //self.dismiss(animated: true, completion: nil)
             }
         }
         
@@ -345,13 +345,13 @@ open class DKImagePickerController : UINavigationController {
                     if success {
                         if let newAsset = PHAsset.fetchAssets(withLocalIdentifiers: [newImageIdentifier], options: nil).firstObject {
                             if self.presentedViewController != nil {
-                                self.dismiss(animated: true, completion: nil)
+                                //self.dismiss(animated: true, completion: nil)
                             }
                             self.selectImage(DKAsset(originalAsset: newAsset))
                         }
                     } else {
                         if self.sourceType != .camera {
-                            self.dismiss(animated: true, completion: nil)
+                            //self.dismiss(animated: true, completion: nil)
                         }
                         self.selectImage(DKAsset(image: image))
                     }
@@ -370,12 +370,12 @@ open class DKImagePickerController : UINavigationController {
                     if success {
                         if let newAsset = PHAsset.fetchAssets(withLocalIdentifiers: [newVideoIdentifier], options: nil).firstObject {
                             if self.sourceType != .camera || self.viewControllers.count == 0 {
-                                self.dismiss(animated: true, completion: nil)
+                                //self.dismiss(animated: true, completion: nil)
                             }
                             self.selectImage(DKAsset(originalAsset: newAsset))
                         }
                     } else {
-                        self.dismiss(animated: true, completion: nil)
+                        //self.dismiss(animated: true, completion: nil)
                     }
                 })
             }
@@ -400,15 +400,15 @@ open class DKImagePickerController : UINavigationController {
     }
     
     open func dismiss(animated flag: Bool) {
-        self.presentingViewController?.dismiss(animated: flag, completion: {
+        //self.presentingViewController?.dismiss(animated: flag, completion: {
             self.didCancel?()
-        })
+        //})
     }
     
     open func done() {
-        self.presentingViewController?.dismiss(animated: true, completion: {
+        //self.presentingViewController?.dismiss(animated: true, completion: {
             self.didSelectAssets?(self.selectedAssets)
-        })
+        //})
     }
     
     // MARK: - Selection
