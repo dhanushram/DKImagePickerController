@@ -272,7 +272,10 @@ open class DKImagePickerController : UINavigationController {
                 
                 self.UIDelegate.prepareLayout(self, vc: rootVC)
                 self.updateCancelButtonForVC(rootVC)
+                
                 self.setViewControllers([rootVC], animated: false)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "DKImagePickerControllerRootViewControllerAvailable"), object: nil)
+                
                 if let count = self.defaultSelectedAssets?.count, count > 0 {
                     self.UIDelegate.imagePickerController(self, didSelectAssets: [self.defaultSelectedAssets!.last!])
                 }
