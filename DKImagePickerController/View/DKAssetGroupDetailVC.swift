@@ -73,6 +73,8 @@ public class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, U
 		self.collectionView.dataSource = self
 		self.view.addSubview(self.collectionView)
 		
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "DKImagePickerControllerCollectionViewAvailable"), object: nil)
+        
 		self.footerView = self.imagePickerController.UIDelegate.imagePickerControllerFooterView(self.imagePickerController)
 		if let footerView = self.footerView {
 			self.view.addSubview(footerView)
