@@ -40,7 +40,7 @@ public class DKAssetGroupDetailVC: UIViewController, UICollectionViewDelegate, U
         return button
     }()
 		
-    internal var collectionView: UICollectionView!
+    public var collectionView: UICollectionView!
     internal weak var imagePickerController: DKImagePickerController!
     private var selectedGroupId: String?
 	private var groupListVC: DKAssetGroupListVC!
